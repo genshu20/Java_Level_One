@@ -41,6 +41,7 @@ public class LessonTwo {
         for(int i=0;i<arr.length;i++){
             totalSum+=arr[i];
         }
+        if(totalSum%2!=0)return false;
         for(int i=0;i<arr.length;i++){
             tempSum+=arr[i];
             if(tempSum==totalSum/2){
@@ -57,16 +58,28 @@ public class LessonTwo {
         int i=0;
         while(i< Math.abs(sh%arr.length)) {
             int buf = arr[0];
-            for (int j = 0; ; j = (arr.length + (j - a)) % arr.length) {
-                if ((arr.length + (j - a)) % arr.length == 0) {
+            for (int j = 0; ; j = (arr.length+(j - a))%arr.length) {
+                if ((arr.length+(j - a))%arr.length == 0) {
                     arr[j] = buf;
                     break;
                 }
-                arr[j] = arr[(arr.length + (j - a)) % arr.length];
+                arr[j] = arr[(arr.length+(j - a))%arr.length];
             }
             i++;
         }
         System.out.println(Arrays.toString(arr));
+    }
+    public static int[] shift2(int[]arr,int n){
+        System.out.println(Arrays.toString(arr));
+        int k=n%arr.length+arr.length;
+        for (int i = 0; i <k ; i++) {
+            int tmp=arr[arr.length-1];
+            for(int j=arr.length-1;j>0;j--){
+              arr[j]=arr[j-1];
+            }
+            arr[0]=tmp;
+        }
+        return arr;
     }
     public static void main(String[] args) {
         int[] oneEndZero = getArrayInt("enter ones and zeros");//задание 1
@@ -152,6 +165,9 @@ public class LessonTwo {
         System.out.println("min: " + exerciseFiveInsert[0] + " max: " + exerciseFiveInsert[m - 1]);
         System.out.println(division(exerciseFiveSixSeven));//задание 6
         int sh=readInt("enter the shift of array");//задание 7
-        shift(exerciseFiveSixSeven,sh);
+        int[]exSeven1=exerciseFiveSixSeven.clone();
+        int[]exSeven2=exerciseFiveSixSeven.clone();
+        System.out.println(Arrays.toString(shift2(exSeven1,sh)));
+        shift(exSeven2,sh);
     }
 }
