@@ -65,7 +65,7 @@ public class XOBackground {
         ch[y - 1][x - 1] = DOT_X;
     }
 
-    public char[][] initMap(int n) {
+    public static char[][] initMap(int n) {
         char[][] ch = new char[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {

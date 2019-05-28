@@ -20,6 +20,7 @@ public class StartNewGameWindow extends JFrame {
     private ButtonGroup gameMode =new ButtonGroup();
     private JSlider slFieldSize;
     private JSlider slWinLength;
+    static JLabel winner;
 
     public StartNewGameWindow(GameWindow gameWindow){
         this.gameWindow = gameWindow;
@@ -29,9 +30,11 @@ public class StartNewGameWindow extends JFrame {
         int posX=(int)(gameWindowBounds.getCenterX()-WIN_WIDTH/2);
         int posY=(int)(gameWindowBounds.getCenterY()-WIN_HEIGHT/2);
         setLocation(posX,posY);
-        setLayout(new GridLayout(10,1));
+        setLayout(new GridLayout(11,1));
         addGameControlMode();
         addGameControlFieldWinLength();
+        winner=new JLabel();
+        add(winner);
         JButton btnStartGame=new JButton("Start Game");
         btnStartGame.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -53,6 +56,7 @@ public class StartNewGameWindow extends JFrame {
         int fieldSize = slFieldSize.getValue();
         int winLength = slWinLength.getValue();
         gameWindow.startNewGame(gameMode,fieldSize,fieldSize,winLength);
+        MapGame.field=XOBackground.initMap(fieldSize);
     }
     private void addGameControlMode(){
        add(new JLabel("Choose game mode"));

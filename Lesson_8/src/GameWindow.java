@@ -8,7 +8,7 @@ public class GameWindow extends JFrame {
     private static final int WIN_WIDTH=505;
     private static final int WIN_X=800;
     private static final int WIN_Y=200;
-    StartNewGameWindow startNewGameWindow;
+    static StartNewGameWindow startNewGameWindow;
     private static MapGame field;
 
     public GameWindow(){
@@ -41,4 +41,5 @@ public class GameWindow extends JFrame {
     public void startNewGame(int mode,int fieldSizeX,int fieldSizeY,int winLength){
         field.startNewGame(mode,fieldSizeX,fieldSizeY,winLength);
     }
+
 }
