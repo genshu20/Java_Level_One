@@ -15,17 +15,6 @@ public class XOBackground {
         return true;
     }
 
-    public int getNumber(String welcome, int min, int max) {
-        int a = min - 1;
-        do {
-            System.out.println(welcome);
-            if (sc.hasNextInt()) {
-                a = sc.nextInt();
-            } else sc.next();
-        } while (a < min || a > max);
-        return a;
-    }
-
     public boolean isCellValid(int x, int y, char[][] ch) {
         if (x < 0 || x >= ch.length || y < 0 || y >= ch.length) return false;
         if (ch[x][y] == DOT_EMPTY) return true;
@@ -58,13 +47,6 @@ public class XOBackground {
         }
     }
 
-    public void humanTurn(char[][] ch) {
-        int x, y;
-        x = getNumber("enter x", 1, ch.length);
-        y = getNumber("enter y", 1, ch.length);
-        ch[y - 1][x - 1] = DOT_X;
-    }
-
     public static char[][] initMap(int n) {
         char[][] ch = new char[n][n];
         for (int i = 0; i < n; i++) {
@@ -74,21 +56,6 @@ public class XOBackground {
             }
         }
         return ch;
-    }
-
-    public void printMap(char[][] ch) {
-        for (int i = 0; i <= ch.length; i++) {
-            System.out.print(" " + i);
-        }
-        System.out.println();
-        for (int i = 0; i < ch.length; i++) {
-            System.out.printf("%2d ", (i + 1));
-            for (int j = 0; j < ch.length; j++) {
-                System.out.print(ch[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
     public boolean checkHor(int dtw,int x,int y,char c,char[][]ch){
         for (int i = x; i <x+dtw ; i++) {

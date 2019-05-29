@@ -15,7 +15,7 @@ public class MapGame extends JPanel {
     int cellWidth;
     boolean isInit = false;
     int mode;
-
+    boolean b=false;
     public MapGame() {
         setBackground(Color.ORANGE);
         addMouseListener(new MouseAdapter() {
@@ -25,36 +25,40 @@ public class MapGame extends JPanel {
             }
         });
     }
-
     private void update(MouseEvent e) {
+        char ch;
+        if(!b)ch=xob.DOT_X;
+        else ch=xob.DOT_O;
         int cellX = e.getX() / cellWidth;
         int cellY = e.getY() / cellHeight;
-        boolean b = false;
-        if (xob.isCellValid(cellX, cellY, field)) {
-            System.out.println(cellX + " " + cellY);
-            field[cellX][cellY] = xob.DOT_X;
+            if (xob.isCellValid(cellX, cellY, field)) {
+                System.out.println(cellX + " " + cellY);
+                field[cellX][cellY] = ch;
 
-            repaint();
-            if (xob.checkWin(xob.DOT_X, winLength, field)) {
-                GameWindow.startNewGameWindow.setVisible(true);
-                StartNewGameWindow.winner.setText("X - is WON!");
-            } else if (xob.isMapFull(field)) {
-                GameWindow.startNewGameWindow.setVisible(true);
-                StartNewGameWindow.winner.setText("DRAW");
-            } else {
-                xob.aiTurn(field, winLength);
                 repaint();
-                if (xob.checkWin(xob.DOT_O, winLength, field)) {
+                if (xob.checkWin(ch, winLength, field)) {
                     GameWindow.startNewGameWindow.setVisible(true);
-                    StartNewGameWindow.winner.setText("O - is WON!");
+                    StartNewGameWindow.winner.setText(ch+" - is WON!");
                 } else if (xob.isMapFull(field)) {
                     GameWindow.startNewGameWindow.setVisible(true);
                     StartNewGameWindow.winner.setText("DRAW");
-                }
+                } else {
+                    if(mode==MODE_H_V_A) {
+                        xob.aiTurn(field, winLength);
+                        repaint();
+                        if (xob.checkWin(xob.DOT_O, winLength, field)) {
+                            GameWindow.startNewGameWindow.setVisible(true);
+                            StartNewGameWindow.winner.setText("O - is WON!");
+                        } else if (xob.isMapFull(field)) {
+                            GameWindow.startNewGameWindow.setVisible(true);
+                            StartNewGameWindow.winner.setText("DRAW");
+                        }
+                    }else b=!b;
 
+                    }
+                }
             }
-        }
-    }
+
         public void startNewGame ( int mode, int fieldSizeX, int fieldSizeY, int winLength){
             System.out.println(mode + " " + fieldSizeX + " " + fieldSizeY + " " + winLength);
             this.fieldSizeX = fieldSizeX;
